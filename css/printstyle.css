@@ -1,0 +1,59 @@
+@charset "UTF-8";
+
+body {
+  font-family: Georgia, Times, serif;
+  font-size: 100%;
+  margin: 0;
+  padding: 10px;
+}
+
+#main {
+    font-size: 80%;
+}
+
+/* -------------- */
+
+h3, h2, h1, nav li {
+	font-family: Tahoma, Arial, sans-serif;
+}
+
+ul {
+	list-style-type: none;
+	display: none;
+	padding: 0;
+	margin: 2em 0 2em 0;
+}
+
+nav li {
+	font-size: 95%;
+	font-weight: bold;
+	
+	padding: 10px;
+	border: 2px dashed #999;
+	border-radius: 6px;
+}
+
+a {
+    text-decoration: none;
+    color: #666;
+}
+
+pre {
+	padding: 10px 10px 4px 10px;
+	border-radius: 6px;
+	border: thin dashed #999;
+}
+
+p code {
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+}
+
+/* ---------------- */
+
+.de-em {
+	color: #999;
+}
+
+
+

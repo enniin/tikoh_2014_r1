@@ -1,0 +1,190 @@
+@charset "UTF-8";
+
+
+
+/* --------- ASEMOINTI: NORMAALI SELAIN ------------ */
+
+body {
+  font-family: Georgia, Times, serif;
+  font-size: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #999;
+  background-image: url('../img/bg2.jpg');
+  background-attachment: fixed;
+}
+
+#main {
+	margin-left:auto;
+	margin-right:auto;
+	font-size: 92%;
+	width: 75%;
+	min-width: 600px;
+	max-width: 960px;
+	min-height: 360px;
+	padding: 20px;
+	background-color: rgba(255,255,255,0.5);
+}
+
+#enter {
+	margin-left:auto;
+	margin-right:auto;
+	margin-top: 2em;
+	font-size: 92%;
+	width: 26em;
+	padding: 20px;
+	background-color: rgba(255,255,255,0.5);
+}
+
+header {
+	width: 100%;
+	text-align: center;
+	text-shadow: 2px 2px 2px #FFF;
+	border: 2px dashed #999;
+	border-radius: 0.5em;
+	margin-bottom: 1em;
+	background-color: rgba(163, 204, 122, 0.3);
+}
+
+
+article {
+	border: 2px dashed #999;
+	border-radius: 0.5em;
+	background-color: rgba(255,255,255,0.5);
+	padding: 20px;
+}
+
+footer {
+	font-size: 80%;
+	text-align: right;
+}
+
+/* ----------- ASEMOINTI: PIENET LAITTEET ----------- */
+
+@media screen and (max-device-width: 768px) {
+
+	body {
+		background-attachment: fixed;
+		font-size: 300%;
+	}
+
+	#main, #enter {
+		margin-left: 0;
+		width: 100%;
+		max-width: 100%;
+	}
+
+	article {
+		position: relative;
+		margin-left: 0;
+		margin-bottom: 1em;
+	}
+	
+	button {
+	   font-size: 90%;
+	}
+	
+	pre code {
+	   font-size: 80%;
+	}
+
+}
+
+/* ------------ Elementtityylit ----------- */
+
+
+/* Yleiset */
+
+h1, nav li {
+	font-family: Tahoma, Arial, sans-serif;
+}
+
+p {
+	line-height: 1.3em;
+	margin-left: 1em;
+	margin-right: 1em;
+}
+
+article h1 {
+	margin-left: 0.5em;
+}
+
+a {
+	text-decoration: none;
+	color: #668066;
+}
+a:hover {
+	text-decoration: underline;
+}
+
+img {
+	margin: 0;
+	padding: 0;
+}
+
+button {
+	margin: 1em;
+}
+
+footer p {
+	margin-bottom: 0;
+}
+
+
+/* Huomioalueet & koodien muotoilu */
+
+pre {
+	padding: 0.8em 0.8em 0.3em 0.8em;
+	border-radius: 0.5em;
+	background-color: rgba(122,153,92,0.3);
+	overflow: auto;
+	margin-bottom: 2em;
+	margin-left: 1em;
+	margin-right: 1em;
+}
+
+pre.sini {
+	background-color: rgba(31, 92, 153,0.3);
+	color: #143D66;
+}
+
+code {
+	font-size: 110%;
+}
+
+pre code {
+	padding: 0;
+	margin: 0;
+}
+
+p code {
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+}
+
+.de-em {
+	color: #7A997A;
+}
+
+
+/* Lomakkeet ja taulut */
+
+table {
+	margin-left: 1em;
+	margin-right: 3em;
+	padding: 0.5em;
+	background-color: rgba(122,153,92,0.3);
+	border-radius: 0.5em;
+}
+
+td, th {
+	padding: 0.5em;
+	text-align: left;
+}
+
+th {
+	background-color: rgba(122,153,92,0.6);
+}
+
+
+
