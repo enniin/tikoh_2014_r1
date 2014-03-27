@@ -24,15 +24,17 @@
 		
 		<article>
 			<?php
-				$y_tiedot = "host=dbstud.sis.uta.fi port=5432 dbname=tiko2014db1 user=js96416 password=gioRGi0n0";
-
-				if (!$yhteys = pg_connect($y_tiedot))
-					 die("Tietokantayhteyden luominen epäonnistui.");
+				include '../db_connct.php';
+				session_start();
 				
-				$encoding = pg_client_encoding($yhteys);
-				echo "Client encoding is: ", $encoding, "\n";
+				$yhteys = luo_yhteys();
 				
-				$kysely = "SELECT tl_nimi, tl_kuvaus, tl_luontipvm, (select count(teht_id) from htsysteemi.sisaltyy_listaan where tl_nimi = 'Perushakuja 1') AS teht_lkm, etunimi, sukunimi FROM htsysteemi.t_lista AS tl INNER JOIN htsysteemi.kayttaja AS ka ON tl.kayt_id = ka.kayt_id WHERE tl_nimi = 'Perushakuja 1';";
+				echo 'Käyttöoikeus: ', $_SESSION["rooli"];
+				
+				$listanimi = "Perushakuja 1";
+				$_SESSION["lista"] = $listanimi;
+				
+				$kysely = "SELECT tl_nimi, tl_kuvaus, tl_luontipvm, (select count(teht_id) from htsysteemi.sisaltyy_listaan where tl_nimi = '$listanimi') AS teht_lkm, etunimi, sukunimi FROM htsysteemi.t_lista AS tl INNER JOIN htsysteemi.kayttaja AS ka ON tl.kayt_id = ka.kayt_id WHERE tl_nimi = '$listanimi';";
 				$tulos = pg_query($kysely);
 				
 				if (!$tulos)
@@ -68,16 +70,43 @@
 				echo "</table>";
 				
 				pg_close($yhteys);
-?>
+			?>
+			
 			<button type="button"> Suorita tehtävälista </button>
+			
+			<?php
+				
+				$yhteys = luo_yhteys();
+				
+				$kayttaja = $_SESSION["kirjautunut"];
+				$listanimi = $_SESSION["lista"];
+				
+				$tulos = pg_query("SELECT kayt_id FROM htsysteemi.t_lista WHERE tl_nimi = '$listanimi';");
+				
+				if (!$tulos)
+				{
+					echo "Virhe kyselyssä.\n";
+					exit;
+				}
+		
+				$rivi = pg_fetch_row($tulos);
+				
+				if($kayttaja == $rivi[0])
+				{
+					echo '<button type="button"> Muokkaa listaa </button>';
+				}
+			
+			pg_close($yhteys);
+			?>
 		
 		</article>
 
 		<footer role="contentinfo">
-			<p>&copy; Copyleft elikkäs right</p>
+			<p>&copy; Kähkönen, Saaristo, Seppä, TiKO 2014</p>
 		</footer>
 
 	</div>
 
 
 </body>
+</html>
