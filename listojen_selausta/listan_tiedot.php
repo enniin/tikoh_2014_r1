@@ -1,6 +1,4 @@
-
-
-
+<?php session_start(); ?>
 <!DOCTYPE HTML> 
 <html lang="fi">
 
@@ -24,16 +22,26 @@
 		
 		<article>
 			<?php
-				include '../db_connct.php';
-				session_start();
+				// Tarkastetaan ensin käyttöoikeus ja luodaan siqnout-palikka:
+				include '../kirjautuminen/tarkistus.php';
+				if (!tarkasta_rooli())
+				{
+					echo 'Kirjautuminen vaaditaan!';
+					echo '<a href="../kirjautuminen/kirjaudu.html"> Kirjaudu >></a>';
+					exit;
+				}
+				echo '<div id="signout">';
+				echo 'Käyttöoikeus: ', $_SESSION["rooli"];
+				echo '<br /><a href="../kirjautuminen/ulos.php">Kirjaudu ulos</a>';
+				echo '</div>';
 				
+				// Kaikki oli ok, luodaan yhteys ja haetaan tiedot:
+				include '../db_connct.php';
 				$yhteys = luo_yhteys();
 				
-				echo 'Käyttöoikeus: ', $_SESSION["rooli"];
-				
 				$listanimi = "Perushakuja 1";
-				$_SESSION["lista"] = $listanimi;
 				
+				// Haetaan tehtävälistan perustietoja:
 				$kysely = "SELECT tl_nimi, tl_kuvaus, tl_luontipvm, (select count(teht_id) from htsysteemi.sisaltyy_listaan where tl_nimi = '$listanimi') AS teht_lkm, etunimi, sukunimi FROM htsysteemi.t_lista AS tl INNER JOIN htsysteemi.kayttaja AS ka ON tl.kayt_id = ka.kayt_id WHERE tl_nimi = '$listanimi';";
 				$tulos = pg_query($kysely);
 				
@@ -48,10 +56,11 @@
 				$pvm = date_create($rivi[2]);
 				
 				echo "<h1>$rivi[0]</h1>";
-				echo "<p>$rivi[1] Tehtävien lukumäärä: $rivi[3].<br /><span class='de-em'>Tekijä: $rivi[4] $rivi[5]<br />Luotu: ";
+				echo "<p>$rivi[1] Tehtävien lukumäärä: $rivi[3].<br />Tekijä: $rivi[4] $rivi[5]<br />Luotu: ";
 				echo date_format($pvm, 'd.m.Y');
-				echo "</span></p>";
+				echo "</p>";
 				
+				// Haetaan tietoja tehtävistä:
 				$kysely = "SELECT nro, tyyppi, kuvaus FROM htsysteemi.sisaltyy_listaan AS sl, htsysteemi.tehtava AS th WHERE sl.tl_nimi = 'Perushakuja 1' AND sl.teht_id = th.teht_id;";
 				$tulos = pg_query($kysely);
 				
@@ -69,18 +78,12 @@
 				}
 				echo "</table>";
 				
-				pg_close($yhteys);
-			?>
-			
-			<button type="button"> Suorita tehtävälista </button>
-			
-			<?php
-				
-				$yhteys = luo_yhteys();
+				echo '<button type="button"> Suorita tehtävälista </button>';
 				
 				$kayttaja = $_SESSION["kirjautunut"];
-				$listanimi = $_SESSION["lista"];
 				
+				// Jos kyseessä on listan luonut opettaja, sallitaan muokkaus:
+				// (myös ylläpitäjän oikeus toteutetaan tähän)
 				$tulos = pg_query("SELECT kayt_id FROM htsysteemi.t_lista WHERE tl_nimi = '$listanimi';");
 				
 				if (!$tulos)

@@ -59,6 +59,12 @@ footer {
 	text-align: right;
 }
 
+#signout {
+	position: relative;
+	float: right;
+	text-align: right;
+}
+
 /* ----------- ASEMOINTI: PIENET LAITTEET ----------- */
 
 @media screen and (max-device-width: 768px) {
@@ -152,18 +158,8 @@ code {
 	font-size: 110%;
 }
 
-pre code {
-	padding: 0;
-	margin: 0;
-}
-
-p code {
-	padding-left: 0.5em;
-	padding-right: 0.5em;
-}
-
 .de-em {
-	color: #7A997A;
+	color: #99B280;
 }
 
 
