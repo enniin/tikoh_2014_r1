@@ -13,8 +13,11 @@ pg_query("set search_path to htsysteemi");
 
 $kayt_id_tulos = pg_query("select kayt_id from kayttaja where kayt_tunnus = '$kayt_tunnus' and salasana = '$salasana'");
 
-if(pg_num_rows($kayt_id_tulos) < 1)
- echo "Käyttäjänimi tai salasana väärin";
+if(pg_num_rows($kayt_id_tulos) < 1) {
+ echo "Käyttäjänimi tai salasana väärin<br>
+   <a href='kirjaudu.html'>Yritä uudelleen</a>";
+}
+
 
 else {
  $kayt_id_rivi = pg_fetch_row($kayt_id_tulos);
@@ -43,7 +46,8 @@ else {
    }
   }
  }
+ header('Location: salainen.php');
 }
 
-header('Location: salainen.php');
+
 ?>
