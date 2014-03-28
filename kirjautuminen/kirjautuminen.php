@@ -1,12 +1,16 @@
 <?php
+
 session_start();
 
 $kayt_tunnus = $_POST['kayt_tunnus'];
 $salasana = $_POST['salasana'];
 
-$y_tiedot = "host=dbstud.sis.uta.fi port=5432 dbname=tiko2014db1 user=a581011 password=salasana";
+// Ulkoinen yhteystiedosto (jens):
+include '../db_connct.php';
+				
+$yhteys = luo_yhteys();
 
-if (!$yhteys = pg_connect($y_tiedot))
+if (!$yhteys)
  die("Tietokantayhteyden luominen epäonnistui.");
 
 pg_query("set search_path to htsysteemi");
@@ -14,8 +18,8 @@ pg_query("set search_path to htsysteemi");
 $kayt_id_tulos = pg_query("select kayt_id from kayttaja where kayt_tunnus = '$kayt_tunnus' and salasana = '$salasana'");
 
 if(pg_num_rows($kayt_id_tulos) < 1) {
- echo "Käyttäjänimi tai salasana väärin<br>
-   <a href='kirjaudu.html'>Yritä uudelleen</a>";
+ //echo "Käyttäjänimi tai salasana väärin<br>
+   //<a href='kirjaudu.html'>Yritä uudelleen</a>";
 }
 
 
@@ -46,7 +50,8 @@ else {
    }
   }
  }
- header('Location: salainen.php');
+ // Yritys siirtää eri sivulle (jens):
+ header('Location: ../listojen_selausta/listan_tiedot.php');
 }
 
 
