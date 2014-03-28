@@ -162,6 +162,12 @@ code {
 	color: #99B280;
 }
 
+.alert {
+	text-align: center;
+	margin-bottom: 2em;
+	font-weight: bold;
+}
+
 
 /* Lomakkeet ja taulut */
 

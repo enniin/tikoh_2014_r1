@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php include '../kirjautuminen/tarkistus.php';?>
 <!DOCTYPE HTML> 
 <html lang="fi">
 
@@ -23,7 +23,7 @@
 		<article>
 			<?php
 				// Tarkastetaan ensin käyttöoikeus ja luodaan siqnout-palikka:
-				include '../kirjautuminen/tarkistus.php';
+				
 				if (!tarkasta_rooli())
 				{
 					echo 'Kirjautuminen vaaditaan!';

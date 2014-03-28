@@ -18,8 +18,7 @@ pg_query("set search_path to htsysteemi");
 $kayt_id_tulos = pg_query("select kayt_id from kayttaja where kayt_tunnus = '$kayt_tunnus' and salasana = '$salasana'");
 
 if(pg_num_rows($kayt_id_tulos) < 1) {
- //echo "Käyttäjänimi tai salasana väärin<br>
-   //<a href='kirjaudu.html'>Yritä uudelleen</a>";
+   header('Location: kirjaudu.php?status="virhe"');
 }
 
 
@@ -50,7 +49,7 @@ else {
    }
   }
  }
- // Yritys siirtää eri sivulle (jens):
+ // Väliaikainen uudelleenohjaus (jens):
  header('Location: ../listojen_selausta/listan_tiedot.php');
 }
 
