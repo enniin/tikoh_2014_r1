@@ -66,7 +66,7 @@ footer {
 }
 
 /* ----------- ASEMOINTI: PIENET LAITTEET ----------- */
-
+/*
 @media screen and (max-device-width: 768px) {
 
 	body {
@@ -94,14 +94,14 @@ footer {
 	   font-size: 80%;
 	}
 
-}
+} */
 
 /* ------------ Elementtityylit ----------- */
 
 
 /* Yleiset */
 
-h1, nav li {
+h1, h2 {
 	font-family: Tahoma, Arial, sans-serif;
 }
 
@@ -118,9 +118,18 @@ article h1 {
 a {
 	text-decoration: none;
 	color: #668066;
+	
 }
 a:hover {
 	text-decoration: underline;
+}
+
+a.napp {
+	background-color: white;
+	padding: 0.5em;
+	margin-right: 1em;
+	border-radius: 0.4em;
+	border: thin solid black;
 }
 
 img {
@@ -142,25 +151,19 @@ footer p {
 pre {
 	padding: 0.8em 0.8em 0.3em 0.8em;
 	border-radius: 0.5em;
-	background-color: rgba(122,153,92,0.3);
+	background-color: rgba(31, 92, 153,0.3);
+	color: #143D66;
 	overflow: auto;
 	margin-bottom: 2em;
 	margin-left: 1em;
 	margin-right: 1em;
 }
 
-pre.sini {
-	background-color: rgba(31, 92, 153,0.3);
-	color: #143D66;
-}
 
 code {
 	font-size: 110%;
 }
 
-.de-em {
-	color: #99B280;
-}
 
 .alert {
 	text-align: center;

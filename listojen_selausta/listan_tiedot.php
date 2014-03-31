@@ -1,4 +1,7 @@
-<?php include '../kirjautuminen/tarkistus.php';?>
+<?php
+include '../kirjautuminen/tarkistus.php';
+include '../kirjautuminen/kaytto-oikeus.php';
+?>
 <!DOCTYPE HTML> 
 <html lang="fi">
 
@@ -15,31 +18,21 @@
 	<div id="main">
 
 		<header>
-			<h1>Tehtävälistan tiedot</h1>
+			<h1>Tehtäväsarjan tiedot</h1>
 		</header>
 
 		<!-- - - - Tagin <article> sisään sivun varsinainen HTML-sisältö. - - - -->
 		
 		<article>
 			<?php
-				// Tarkastetaan ensin käyttöoikeus ja luodaan siqnout-palikka:
-				
-				if (!tarkasta_rooli())
-				{
-					echo 'Kirjautuminen vaaditaan!';
-					echo '<a href="../kirjautuminen/kirjaudu.html"> Kirjaudu >></a>';
-					exit;
-				}
-				echo '<div id="signout">';
-				echo 'Käyttöoikeus: ', $_SESSION["rooli"];
-				echo '<br /><a href="../kirjautuminen/ulos.php">Kirjaudu ulos</a>';
-				echo '</div>';
+				// Luodaan siqnout-palikka:
+				include 'ulospalikka.php';
 				
 				// Kaikki oli ok, luodaan yhteys ja haetaan tiedot:
 				include '../db_connct.php';
 				$yhteys = luo_yhteys();
 				
-				$listanimi = "Perushakuja 1";
+				$listanimi = $_GET["listanimi"];
 				
 				// Haetaan tehtävälistan perustietoja:
 				$kysely = "SELECT tl_nimi, tl_kuvaus, tl_luontipvm, (select count(teht_id) from htsysteemi.sisaltyy_listaan where tl_nimi = '$listanimi') AS teht_lkm, etunimi, sukunimi FROM htsysteemi.t_lista AS tl INNER JOIN htsysteemi.kayttaja AS ka ON tl.kayt_id = ka.kayt_id WHERE tl_nimi = '$listanimi';";
@@ -70,34 +63,36 @@
 					exit;
 				}
 				
+				// Taulukko:
 				echo "<table><tr>";
 				echo "<th>nro</th><th>tyyppi</th><th>tehtävä</th></tr>";
 				while ($rivi = pg_fetch_row($tulos))
 				{
-					echo "<td>$rivi[0]</td><td>$rivi[1]</td><td>$rivi[2]</td></tr>";
+					echo "<tr><td>$rivi[0]</td><td>$rivi[1]</td><td>$rivi[2]</td></tr>";
 				}
 				echo "</table>";
 				
-				echo '<button type="button"> Suorita tehtävälista </button>';
+				// Nappularivi:
+				echo '<p><br />';
+				echo '<a class="napp" href="tehtava_listat.php"> Takaisin listaukseen </a>';
+				echo '<a class="napp"> Suorita tehtäväsarja </a>';
 				
+				// Muokkausmahdollisuus tekijälle ja ylläpitäjälle:
 				$kayttaja = $_SESSION["kirjautunut"];
+				$onadmin = $_SESSION["rooli"] == 'yllapitaja';
 				
-				// Jos kyseessä on listan luonut opettaja, sallitaan muokkaus:
-				// (myös ylläpitäjän oikeus toteutetaan tähän)
 				$tulos = pg_query("SELECT kayt_id FROM htsysteemi.t_lista WHERE tl_nimi = '$listanimi';");
-				
 				if (!$tulos)
 				{
-					echo "Virhe kyselyssä.\n";
 					exit;
 				}
-		
 				$rivi = pg_fetch_row($tulos);
-				
-				if($kayttaja == $rivi[0])
+				if($kayttaja == $rivi[0] || $onadmin)
 				{
-					echo '<button type="button"> Muokkaa listaa </button>';
+					echo '<a class="napp"> Muokkaa sarjaa </a>';
 				}
+				
+				echo '</p>';
 			
 			pg_close($yhteys);
 			?>
