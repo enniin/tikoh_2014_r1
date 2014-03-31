@@ -15,6 +15,8 @@ Tämän jälkeen ei erikseen tarvitse määritellä php-sessiota, koska tämä i
 
 ULOSKIRJAUSPALIKKA
 
+Aikaslailla heti <article>:n alkuun:
+
 include 'ulospalikka.php';
 
 
