@@ -1,0 +1,21 @@
+:: DEV NOTES ::
+
+
+KIRJAUTUMINEN JA SESSIO
+
+Kaikki paitsi kirjautumissivu vaatii kirjautumisen, joten kaikkien sivujen ensimmäinen rivi (ennen mitään doctypeakaan?):
+
+<?php include '../kirjautuminen/tarkistus.php';?>
+
+Tämän jälkeen ei erikseen tarvitse määritellä php-sessiota, koska tämä include tekee myös sen.
+
+-- tarkistuksen käytöstä ja signout-palikka, kunhan ehdin testaamaan --
+
+
+
+TIETOKANTAYHTEYS
+
+Yhteyden luomiseen voi käyttää ulkoista tiedostoa:
+
+include '../db_connct.php';
+$yhteys = luo_yhteys();
