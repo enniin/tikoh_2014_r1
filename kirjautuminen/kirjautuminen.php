@@ -50,7 +50,7 @@ else {
   }
  }
  // Väliaikainen uudelleenohjaus (jens):
- header('Location: ../listojen_selausta/listan_tiedot.php');
+ header('Location: ../listojen_selausta/tehtava_listat.php');
 }
 
 
