@@ -3,17 +3,20 @@
 
 KIRJAUTUMINEN JA SESSIO
 
-Kaikki paitsi kirjautumissivu vaatii kirjautumisen, joten kaikkien sivujen ensimmäinen rivi (ennen mitään doctypeakaan?):
+Kaikki paitsi kirjautumissivu vaatii kirjautumisen, joten kaikkien sivujen ensimmäinen elementti (ennen mitään doctypeakaan?):
 
-<?php include '../kirjautuminen/tarkistus.php';?>
-
-Tämän jälkeen ei erikseen tarvitse määritellä php-sessiota, koska tämä include tekee myös sen.
-
-Varsinainen tarkistus kannattaa tehdä vasta <article>:n sisällä, niin mahd. virheilmoitus tulostuu nätimmin:
-
+<?php
+include '../kirjautuminen/tarkistus.php';
 include '../kirjautuminen/kaytto-oikeus.php';
+?>
 
-Tämä myös rakentaa ylänurkan käyttöoikeus/uloskirjaus -palikan.
+Tämän jälkeen ei erikseen tarvitse määritellä php-sessiota, koska tämä include tekee myös sen. (Tän vois ehkä tehdä vielä paljon siistimmin??)
+
+
+ULOSKIRJAUSPALIKKA
+
+include 'ulospalikka.php';
+
 
 
 TIETOKANTAYHTEYS

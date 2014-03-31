@@ -1,4 +1,7 @@
-<?php include '../kirjautuminen/tarkistus.php';?>
+<?php
+include '../kirjautuminen/tarkistus.php';
+include '../kirjautuminen/kaytto-oikeus.php';
+?>
 <!DOCTYPE HTML> 
 <html lang="fi">
 
@@ -22,8 +25,8 @@
 		
 		<article>
 			<?php
-				// Tarkastetaan ensin käyttöoikeus ja luodaan siqnout-palikka:
-				include '../kirjautuminen/kaytto-oikeus.php';
+				// Luodaan siqnout-palikka:
+				include 'ulospalikka.php';
 				
 				// Kaikki oli ok, luodaan yhteys ja haetaan tiedot:
 				include '../db_connct.php';
