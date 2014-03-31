@@ -9,8 +9,11 @@ Kaikki paitsi kirjautumissivu vaatii kirjautumisen, joten kaikkien sivujen ensim
 
 Tämän jälkeen ei erikseen tarvitse määritellä php-sessiota, koska tämä include tekee myös sen.
 
--- tarkistuksen käytöstä ja signout-palikka, kunhan ehdin testaamaan --
+Varsinainen tarkistus kannattaa tehdä vasta <article>:n sisällä, niin mahd. virheilmoitus tulostuu nätimmin:
 
+include '../kirjautuminen/kaytto-oikeus.php';
+
+Tämä myös rakentaa ylänurkan käyttöoikeus/uloskirjaus -palikan.
 
 
 TIETOKANTAYHTEYS
@@ -19,3 +22,10 @@ Yhteyden luomiseen voi käyttää ulkoista tiedostoa:
 
 include '../db_connct.php';
 $yhteys = luo_yhteys();
+
+
+
+CSS
+
+<link rel="stylesheet" type="text/css" href="../css/basestyle.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../css/printstyle.css" media="print">

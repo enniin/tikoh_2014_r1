@@ -23,17 +23,7 @@
 		<article>
 			<?php
 				// Tarkastetaan ensin käyttöoikeus ja luodaan siqnout-palikka:
-				
-				if (!tarkasta_rooli())
-				{
-					echo 'Kirjautuminen vaaditaan!';
-					echo '<a href="../kirjautuminen/kirjaudu.html"> Kirjaudu >></a>';
-					exit;
-				}
-				echo '<div id="signout">';
-				echo 'Käyttöoikeus: ', $_SESSION["rooli"];
-				echo '<br /><a href="../kirjautuminen/ulos.php">Kirjaudu ulos</a>';
-				echo '</div>';
+				include '../kirjautuminen/kaytto-oikeus.php';
 				
 				// Kaikki oli ok, luodaan yhteys ja haetaan tiedot:
 				include '../db_connct.php';
