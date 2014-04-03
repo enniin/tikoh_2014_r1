@@ -10,7 +10,7 @@ function tarkasta_rooli(){
   return $_SESSION["rooli"];
 
  else
-  return false;
+  header('Location: ../kirjautuminen/kirjautumisvirhe.php');
 
 }
 
