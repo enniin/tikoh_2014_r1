@@ -1,6 +1,5 @@
 <?php
 include '../kirjautuminen/tarkistus.php';
-include '../kirjautuminen/kaytto-oikeus.php';
 ?>
 <!DOCTYPE HTML> 
 <html lang="fi">
@@ -24,43 +23,25 @@ include '../kirjautuminen/kaytto-oikeus.php';
 		<!-- - - - Tagin <article> sisään sivun varsinainen HTML-sisältö. - - - -->
 		
 		<article>
-			<?php	include 'ulospalikka.php'; ?>
-			
-			<h1>Tervetuloa harjoittelemaan</h1>
-			<p>Ohjeita ohjeita ohjeita löpinää löpinää!</p>
+			<?php
+				include 'ulospalikka.php'; 
+				
+				if ($_SESSION["rooli"] == 'opiskelija')
+					include 'opisk_ohje.php';
+				else
+					include 'opett_ohje.php';
+			?>
 			
 			<h1>Valitse tehtäväsarja:</h1>
 			<p>
 			<?php
-				// Luodaan yhteys:
-				include '../db_connct.php';
-				$yhteys = luo_yhteys();
+				// Taulukko
+				include 'tl_listaus.php';
 				
-				// Haetaan listat:
-				$kysely = "SELECT tl_nimi, tl_kuvaus, tl_luontipvm FROM htsysteemi.t_lista ORDER BY tl_luontipvm;";
-				$tulos = pg_query($kysely);
-				
-				if (!$tulos)
-				{
-					echo "Virhe kyselyssä.\n";
-					exit;
-				}
-				
-				// Taulun tulostus:
-				echo "<table><tr>";
-				echo "<th>sarja</th><th>kuvaus</th><th>pvm</th></tr>";
-				while ($rivi = pg_fetch_row($tulos))
-				{
-					$nimi = $rivi[0];
-					//echo $nimi;
-					echo '<tr><td><a href="listan_tiedot.php?listanimi=', $nimi, '">';
-					echo $nimi, '</a></td>';
-					echo "<td>$rivi[1]</td><td>$rivi[2]</td></tr>";
-				}
-				echo "</table>";
-				
+				// Opettajan linkit
+				if ($_SESSION["rooli"] == 'opettaja' || $_SESSION["rooli"] == 'yllapitaja')
+					include 'opett_linkit.php';
 			
-			pg_close($yhteys);
 			?>
 			</p>
 		

@@ -25,74 +25,21 @@ include '../kirjautuminen/kaytto-oikeus.php';
 		
 		<article>
 			<?php
-				// Luodaan siqnout-palikka:
+				// Siqnout-palikka:
 				include 'ulospalikka.php';
 				
-				// Kaikki oli ok, luodaan yhteys ja haetaan tiedot:
+				// Luodaan yhteys:
 				include '../db_connct.php';
 				$yhteys = luo_yhteys();
 				
 				$listanimi = $_GET["listanimi"];
 				
-				// Haetaan tehtävälistan perustietoja:
-				$kysely = "SELECT tl_nimi, tl_kuvaus, tl_luontipvm, (select count(teht_id) from htsysteemi.sisaltyy_listaan where tl_nimi = '$listanimi') AS teht_lkm, etunimi, sukunimi FROM htsysteemi.t_lista AS tl INNER JOIN htsysteemi.kayttaja AS ka ON tl.kayt_id = ka.kayt_id WHERE tl_nimi = '$listanimi';";
-				$tulos = pg_query($kysely);
+				// Haetaan ja tulostetaan tehtävälistan tiedot:
+				include 'tl_perustiedot.php';
+				include 'tl_tehtiedot.php';
 				
-				if (!$tulos)
-				{
-					echo "Virhe kyselyssä.\n";
-					exit;
-				}
-		
-				$rivi = pg_fetch_row($tulos);
-				date_default_timezone_set('Europe/Helsinki');
-				$pvm = date_create($rivi[2]);
-				
-				echo "<h1>$rivi[0]</h1>";
-				echo "<p>$rivi[1] Tehtävien lukumäärä: $rivi[3].<br />Tekijä: $rivi[4] $rivi[5]<br />Luotu: ";
-				echo date_format($pvm, 'd.m.Y');
-				echo "</p>";
-				
-				// Haetaan tietoja tehtävistä:
-				$kysely = "SELECT nro, tyyppi, kuvaus FROM htsysteemi.sisaltyy_listaan AS sl, htsysteemi.tehtava AS th WHERE sl.tl_nimi = 'Perushakuja 1' AND sl.teht_id = th.teht_id;";
-				$tulos = pg_query($kysely);
-				
-				if (!$tulos)
-				{
-					echo "Virhe kyselyssä.\n";
-					exit;
-				}
-				
-				// Taulukko:
-				echo "<table><tr>";
-				echo "<th>nro</th><th>tyyppi</th><th>tehtävä</th></tr>";
-				while ($rivi = pg_fetch_row($tulos))
-				{
-					echo "<tr><td>$rivi[0]</td><td>$rivi[1]</td><td>$rivi[2]</td></tr>";
-				}
-				echo "</table>";
-				
-				// Nappularivi:
-				echo '<p><br />';
-				echo '<a class="napp" href="tehtava_listat.php"> Takaisin listaukseen </a>';
-				echo '<a class="napp"> Suorita tehtäväsarja </a>';
-				
-				// Muokkausmahdollisuus tekijälle ja ylläpitäjälle:
-				$kayttaja = $_SESSION["kirjautunut"];
-				$onadmin = $_SESSION["rooli"] == 'yllapitaja';
-				
-				$tulos = pg_query("SELECT kayt_id FROM htsysteemi.t_lista WHERE tl_nimi = '$listanimi';");
-				if (!$tulos)
-				{
-					exit;
-				}
-				$rivi = pg_fetch_row($tulos);
-				if($kayttaja == $rivi[0] || $onadmin)
-				{
-					echo '<a class="napp"> Muokkaa sarjaa </a>';
-				}
-				
-				echo '</p>';
+				// Linkkirivi:
+				include 'tl_linkit.php';
 			
 			pg_close($yhteys);
 			?>
