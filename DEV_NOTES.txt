@@ -7,7 +7,6 @@ Kaikki paitsi kirjautumissivu vaatii kirjautumisen, joten kaikkien sivujen ensim
 
 <?php
 include '../kirjautuminen/tarkistus.php';
-include '../kirjautuminen/kaytto-oikeus.php';
 ?>
 
 Tämän jälkeen ei erikseen tarvitse määritellä php-sessiota, koska tämä include tekee myös sen. (Tän vois ehkä tehdä vielä paljon siistimmin??)
@@ -34,3 +33,5 @@ CSS
 
 <link rel="stylesheet" type="text/css" href="../css/basestyle.css" media="screen">
 <link rel="stylesheet" type="text/css" href="../css/printstyle.css" media="print">
+
+(Kantsii ehkä ottaa pohjaksi joku valmis sivu, ja siivota vaan <article>:n sisältö ja rakennella juttunsa siihen.)
