@@ -1,6 +1,5 @@
 <?php
 include '../kirjautuminen/tarkistus.php';
-include '../kirjautuminen/kaytto-oikeus.php';
 ?>
 <!DOCTYPE HTML> 
 <html lang="fi">

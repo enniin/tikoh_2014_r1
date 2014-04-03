@@ -16,7 +16,7 @@ ULOSKIRJAUSPALIKKA
 
 Aikaslailla heti <article>:n alkuun:
 
-include 'ulospalikka.php';
+include '../listojen_selausta/ulospalikka.php';
 
 
 
