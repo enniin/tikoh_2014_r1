@@ -1,0 +1,16 @@
+@charset: "UTF-8";
+
+#tyyppi div {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+#vastausAlue div {
+	display: inline-block;
+	margin: 0.2em;
+	border: 1px solid grey;
+}
+
+#vastausAlue div > * {
+	display: block;
+}
