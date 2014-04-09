@@ -1,16 +1,16 @@
 <?php
 session_start();
 
-//Tarkistaa, onko käyttäjä kirjautunut sisään.
-//Jos on, funktio palauttaa käyttäjän roolin,
+//Tarkistaa, onko kÃ¤yttÃ¤jÃ¤ kirjautunut sisÃ¤Ã¤n.
+//Jos on, funktio palauttaa kÃ¤yttÃ¤jÃ¤n roolin,
 //muuten palautetaan false.
 function tarkasta_rooli(){
 
- if(array_key_exists("kirjautunut",$_SESSION))
-  return $_SESSION["rooli"];
+ if(!array_key_exists("kirjautunut",$_SESSION))
+  header('Location: ../kirjautuminen/kirjautumisvirhe.php');
 
  else
-  header('Location: ../kirjautuminen/kirjautumisvirhe.php');
+  return $_SESSION["rooli"];
 
 }
 
