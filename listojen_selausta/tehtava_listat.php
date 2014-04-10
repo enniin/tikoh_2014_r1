@@ -38,9 +38,16 @@ include '../kirjautuminen/tarkistus.php';
 				// Taulukko
 				include 'tl_listaus.php';
 				
+				// Linkkirivi:
+				echo '<p><br />';
+				
 				// Opettajan linkit
 				if ($_SESSION["rooli"] == 'opettaja' || $_SESSION["rooli"] == 'yllapitaja')
 					include 'opett_linkit.php';
+				
+				// Muut linkit
+				echo '<a class="napp" href="../raportointi/raportti.php"> Yleiset raportit </a>';
+				echo '</p>';
 			
 			?>
 			</p>

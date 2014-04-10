@@ -1,76 +1,60 @@
 <?php
-include '../db_connct.php';
-include '../kirjautuminen/tarkistus.php';
+	include '../kirjautuminen/tarkistus.php';
+	include '../db_connct.php';
 
-// Tarkistetaan käyttöoikeus.
-if (!tarkasta_rooli())
-{
-	echo 'Kirjautuminen vaaditaan!';
-	echo '<a href="../kirjautuminen/kirjaudu.html"> Kirjaudu >></a>';
-	exit;
-}
+	// Jos vastauskentässä on sisältöä, sen tiedot lisätään
+	// kantaan.
+	function luoVastaus($teht_id, $vastaus, $selitys) {
+		$pituus = strlen( trim($vastaus) );
 
-echo '<div id="signout">';
-echo 'Käyttöoikeus: ', $_SESSION["rooli"];
-echo '<br /><a href="../kirjautuminen/ulos.php">Kirjaudu ulos</a>';
-echo '</div>';
-
-// Tarkistaa, onko ylimääräisiin vastauskenttiin lisätty tietoa.
-function tarkistaVastaus($pituus, $lisayslause) {
-	if ($pituus > 0)
-		return (int)(pg_query($lisayslause));
-	else
-		return 1;
-}
-
-// Lisätään tehtävä.
-$yhteys = luo_yhteys();
-
-if (isset($_POST['tallenna'])) {
-	// Tehtävä
-	$tyyppi = $_POST['tyyppi'];
-	$kuvaus = pg_escape_string($_POST['kuvaus']);
-	$pvm = date("Y-m-d");
-	$kayt_id = $_SESSION["kirjautunut"];
-	$tehtavan_lisays = "INSERT INTO tehtava VALUES (DEFAULT, '$tyyppi', '$kuvaus', '$pvm', '$kayt_id')";
-
-	// Tehtävän ID esimerkkivastauksia varten.
-	$teht_lkm_lasku = "SELECT COUNT(teht_id) FROM tehtava";
-	$teht_id_hakutulos = pg_query($teht_lkm_lasku);
-	$teht_id = pg_fetch_result($teht_id_hakutulos, 0, 0) + 1;
-
-	// Esimerkkivastaukset.
-	$eka_vastaus = $_POST['esimerkkivastaus'];
-	$eka_selitys = $_POST['selitys'];
-	$eka_vastaus_lisays = "INSERT INTO esimerkkivastaus VALUES ('$teht_id', '$eka_vastaus', '$eka_selitys')";
-
-	$toka_vastaus = $_POST['esimerkkivastaus2'];
-	$toka_selitys = $_POST['selitys2'];
-	$toka_vastaus_lisays = "INSERT INTO esimerkkivastaus VALUES ('$teht_id', '$toka_vastaus', '$toka_selitys')";
-	$toka_vastaus_pituus = strlen( trim($toka_vastaus) );
-
-	$kolmas_vastaus = $_POST['esimerkkivastaus3'];
-	$kolmas_selitys = $_POST['selitys3'];
-	$kolmas_vastaus_lisays = "INSERT INTO esimerkkivastaus VALUES ('$teht_id', '$kolmas_vastaus', '$kolmas_selitys')";
-	$kolmas_vastaus_pituus = strlen( trim($kolmas_vastaus) );
-
-	// Lisätään tehtävä...
-	pg_query("BEGIN");
-
-	$tehtava_paivitys = (int)(pg_query($tehtavan_lisays));
-	$eka_vastaus_paivitys = (int)(pg_query($eka_vastaus_lisays));
-	$toka_vastaus_paivitys = tarkistaVastaus($toka_vastaus_pituus, $toka_vastaus_lisays);
-	$kolmas_vastaus_paivitys = tarkistaVastaus($kolmas_vastaus_pituus, $kolmas_vastaus_lisays);
-
-	if ($tehtava_paivitys && $eka_vastaus_paivitys && $toka_vastaus_paivitys && $kolmas_vastaus_paivitys) {
-		echo "Lisäys onnistui.";
-		pg_query("COMMIT");
+		if ($pituus > 0)
+			return (int)(pg_query("INSERT INTO htsysteemi.esimerkkivastaus VALUES ('$teht_id', '$vastaus', '$selitys')"));
+		else
+			return 1;
 	}
-	else {
-		echo "Lisäys ei onnistunut.";
-		pg_query("ROLLBACK");
-	}
-}
 
-$pg_close($yhteys);
+	if(isset($_POST['tallenna'])) {
+		$yhteys = luo_yhteys();
+
+		// Tehtävän tiedot.
+		$tyyppi = $_POST['tyyppi'];
+		$kuvaus = pg_escape_string($_POST['kuvaus']);
+		$pvm = date("Y-m-d");
+		$kayt_id = $_SESSION['kirjautunut'];
+
+		// Vastaukset.
+		$vastaus1 = $_POST['esimerkkivastaus'];
+		$vastaus2 = $_POST['esimerkkivastaus2'];
+		$vastaus3 = $_POST['esimerkkivastaus3'];
+
+		// Vastauksien selitykset.
+		$selitys1 = $_POST['selitys'];
+		$selitys2 = $_POST['selitys2'];
+		$selitys3 = $_POST['selitys3'];
+
+		// Teht:n ID vastauksien talletusta varten.
+		$teht_id = pg_fetch_result( pg_query("SELECT COUNT(teht_id) FROM htsysteemi.tehtava"), 0, 0) + 1;
+
+		// Lisätään...
+		pg_query("BEGIN");
+
+		$tehtava_ll = "INSERT INTO htsysteemi.tehtava VALUES (DEFAULT, '$tyyppi', '$kuvaus', '$pvm', '$kayt_id')";
+		
+		$tehtava_paiv = (int)(pg_query($tehtava_ll));
+		$vastaus1_paiv = luoVastaus($teht_id, $vastaus1, $selitys1);
+		$vastaus2_paiv = luoVastaus($teht_id, $vastaus2, $selitys2);
+		$vastaus3_paiv = luoVastaus($teht_id, $vastaus3, $selitys3);
+
+		$onnistui = $tehtava_paiv && $vastaus1_paiv && $vastaus2_paiv && $vastaus3_paiv;
+
+		if ($onnistui)
+			pg_query("COMMIT");
+		else
+			pg_query("ROLLBACK");
+
+		pg_close($yhteys);
+
+		if ($onnistui)
+			header("Location: tehtavalista.php");
+	}
 ?>
