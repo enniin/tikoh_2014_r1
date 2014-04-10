@@ -1,5 +1,6 @@
 <?php
 include '../kirjautuminen/tarkistus.php';
+tarkasta_rooli();
 ?>
 <!DOCTYPE HTML> 
 <html lang="fi">

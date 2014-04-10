@@ -1,5 +1,6 @@
 <?php
 include '../kirjautuminen/tarkistus.php';
+tarkasta_rooli();
 $_SESSION["tlnimi"] = '';
 ?>
 <!DOCTYPE HTML> 

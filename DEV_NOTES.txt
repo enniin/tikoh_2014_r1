@@ -7,9 +7,10 @@ Kaikki paitsi kirjautumissivu vaatii kirjautumisen, joten kaikkien sivujen ensim
 
 <?php
 include '../kirjautuminen/tarkistus.php';
+tarkasta_rooli();
 ?>
 
-Tämän jälkeen ei erikseen tarvitse määritellä php-sessiota, koska tämä include tekee myös sen. (Tän vois ehkä tehdä vielä paljon siistimmin??)
+Tämän jälkeen ei erikseen tarvitse määritellä php-sessiota, koska tämä include tekee myös sen.
 
 
 ULOSKIRJAUSPALIKKA
