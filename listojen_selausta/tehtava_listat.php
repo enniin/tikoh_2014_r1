@@ -1,5 +1,6 @@
 <?php
 include '../kirjautuminen/tarkistus.php';
+$_SESSION["tlnimi"] = '';
 ?>
 <!DOCTYPE HTML> 
 <html lang="fi">

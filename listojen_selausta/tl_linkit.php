@@ -3,7 +3,7 @@
 	// Peruslinkit:
 	echo '<p><br />';
 	echo '<a class="napp" href="tehtava_listat.php"> Takaisin listaukseen </a>';
-	echo '<a class="napp" href="aloita_sessio.php> Suorita tehtäväsarja </a>';
+	echo '<a class="napp" href="../sessio/uusi_sessio.php"> Suorita tehtäväsarja </a>';
 				
 	// Muokkausmahdollisuus tekijälle ja ylläpitäjälle:
 	$kayttaja = $_SESSION["kirjautunut"];

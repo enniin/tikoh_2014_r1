@@ -31,7 +31,6 @@ include '../kirjautuminen/tarkistus.php';
 				include '../db_connct.php';
 				$yhteys = luo_yhteys();
 				
-				// Tallennetaan listanimi paikalliseen käyttöön sekä sessioon:
 				$listanimi = $_GET["listanimi"];
 				$_SESSION["tlnimi"] = $listanimi;
 				

@@ -1,7 +1,7 @@
 <?php
 
 	// Haetaan tietoja tehtävistä:
-	$kysely = "SELECT nro, tyyppi, kuvaus FROM htsysteemi.sisaltyy_listaan AS sl, htsysteemi.tehtava AS th WHERE sl.tl_nimi = '$listanimi' AND sl.teht_id = th.teht_id;";
+	$kysely = "SELECT nro, tyyppi, kuvaus FROM htsysteemi.sisaltyy_listaan AS sl, htsysteemi.tehtava AS th WHERE sl.tl_nimi = '$listanimi' AND sl.teht_id = th.teht_id ORDER BY nro;";
 	$tulos = pg_query($kysely);
 				
 	if (!$tulos)
