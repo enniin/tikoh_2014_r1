@@ -1,6 +1,7 @@
 <?php 
 include '../kirjautuminen/tarkistus.php';
 include '../db_connct.php';
+tarkasta_rooli();
 
 
 $yhteys = luo_yhteys();
@@ -17,8 +18,8 @@ $teht_id = $teht_id_rivi[0];
 $alk_aika = $_POST["alk_aika"];
 $vastaus = $_POST["vastaus"];
 
-//Varsinainen tehtÃ¤vÃ¤n tarkistus tÃ¤ssÃ¤.
-$esim_vast_tulos = pg_query("select esim_vast from esimerkkivastaus where teht_id = $teht_id");
+//Varsinainen tehtÃƒÂ¤vÃƒÂ¤n tarkistus tÃƒÂ¤ssÃƒÂ¤.
+$esim_vast_tulos = @pg_query("select esim_vast from esimerkkivastaus where teht_id = $teht_id");
 $esim_vast_rivi = pg_fetch_row($esim_vast_tulos);
 $esim_vast = $esim_vast_rivi[0];
 pg_query("set search_path to esimerkkikanta");
@@ -35,7 +36,7 @@ if($kayttajan_vast_tulos) {
  }
 }
 
-//Toimenpiteet tuloksen selvittyä.
+//Toimenpiteet tuloksen selvittyÃ¤.
 if($oikein == "false") {
  if($_SESSION["yritys_nro"] >= 2) {
   $_SESSION["teht_nro"]++;
@@ -49,6 +50,8 @@ if($oikein == "true") {
  $_SESSION["teht_nro"]++;
  $_SESSION["yritys_nro"] = 0;
 }
+
+$vastaus = pg_escape_string($vastaus);
 
 pg_query("set search_path to htsysteemi");
 pg_query("insert into ratk_yritys(ses_id, teht_id, alk_aika, lop_aika, vastaus, oikein) values($ses_id, $teht_id, '$alk_aika', current_time, '$vastaus', $oikein)");
