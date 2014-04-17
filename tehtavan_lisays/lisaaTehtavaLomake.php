@@ -25,6 +25,11 @@
 		<!-- - - - Tagin <article> sisään sivun varsinainen HTML-sisältö. - - - -->
 		
 		<article>
+			<?php
+				// Siqnout-palikka:
+				include "../listojen_selausta/ulospalikka.php";
+			?>
+		
 			<form action="lisaaTehtava.php" method="post">
 
 			<fieldset id = "tyyppi">
@@ -79,6 +84,8 @@
 			<p>Tyhjäksi jätettyä ylimääräistä vastauskenttää ei talleteta.</p>
 		
 		</fieldset>
+		</form>
+		<p><a href = "../listojen_selausta/tehtava_listat.php" class = "napp">Palaa etusivulle</a></p>
 
 		<input type="hidden" name="tallenna" value="Jatka" />
 		<input type="submit" name="lahetaLomake" value="Tallenna" />
