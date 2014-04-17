@@ -84,11 +84,11 @@
 			<p>Tyhjäksi jätettyä ylimääräistä vastauskenttää ei talleteta.</p>
 		
 		</fieldset>
-		</form>
-		<p><a href = "../listojen_selausta/tehtava_listat.php" class = "napp">Palaa etusivulle</a></p>
-
 		<input type="hidden" name="tallenna" value="Jatka" />
 		<input type="submit" name="lahetaLomake" value="Tallenna" />
+		
+		</form>
+		<p><a href = "../listojen_selausta/tehtava_listat.php" class = "napp">Palaa etusivulle</a></p>
 		
 		</article>
 
