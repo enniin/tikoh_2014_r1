@@ -15,7 +15,7 @@ ORDER BY st.ses_id
 SELECT pvm, etunimi || ' ' || sukunimi as suorittaja, tl_nimi, aika, tehtavia, kpl_oikein 
 FROM (kayttaja INNER JOIN sessio ON kayttaja.kayt_id = sessio.kayt_id)
 	INNER JOIN ses_agg ON sessio.ses_id = ses_agg.ses_id
-ORDER BY tl_nimi, pvm;";
+ORDER BY pvm, tl_nimi;";
 			
 			$tulos = pg_query($kysely);
 				

@@ -41,7 +41,7 @@ tarkasta_rooli();
 				// Tehtävälistan tietoja (pakollinen):
 				echo '<h1>R2 - Tehtävälistan tietoja</h1>';
 				echo '<p>Tee raportti, joka näyttää tiettyyn tehtävälistaan liittyvien sessioiden yhteenvetotiedot: session nopein, hitain ja keskimääräinen suoritusaika.</p>';
-				echo '<p>Raportin R3 saat esiin tehtävälistan nimeä klikkaamalla (sit joskus).</p>';
+				echo '<p>Raportin R3 saat esiin tehtävälistan nimeä klikkaamalla.</p>';
 				include 'rap_R2.php';
 				
 				// Tehtävien vaikeus (valinnainen):
