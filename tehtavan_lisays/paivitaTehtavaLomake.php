@@ -29,6 +29,9 @@
 				include '../db_connct.php';
 				$yhteys = luo_yhteys();
 
+				// Siqnout-palikka:
+				include "../listojen_selausta/ulospalikka.php";
+
 				$teht_id = $_GET['tId'];
 				$_SESSION['tehtava_id'] = $teht_id;
 			?>
@@ -69,6 +72,9 @@
 
 		<input type="hidden" name="tallenna" value="Jatka" />
 		<input type="submit" name="tehtavanLisays" value="Tallenna" />
+		</form>
+		
+		<p><a href = "../listojen_selausta/tehtava_listat.php" class = "napp">Palaa etusivulle</a></p>
 		
 		</article>
 
