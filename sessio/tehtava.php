@@ -36,17 +36,11 @@ tarkasta_rooli();
 			$ses_id = $_SESSION["ses_id"];
 			$tl_nimi = $_SESSION["tl_nimi"];
 			$teht_nro = $_SESSION["teht_nro"];
-
 			
-			//Jos ollaan uudessa yrityksessä, näytetään ilmoitus.
-			if($_SESSION["yritys_nro"] > 0) {
-			 echo("<p>V&auml;&auml;rin! Yrit&auml; uudelleen!</p>");
-			}
-			
-			//Kannan rakenne käyttäjän tietoon.
+			//Kannan rakenne muotoilluksi merkkijonoksi.
 			$taulut_tulos = pg_query("select table_name from information_schema.tables where table_schema = 'esimerkkikanta'");
 			pg_query("set search_path to esimerkkikanta");
-			
+
 			$metadata = '';
 			while($taulut_rivi = pg_fetch_row($taulut_tulos)) {
 			 $taulun_nimi = $taulut_rivi[0];
@@ -59,6 +53,7 @@ tarkasta_rooli();
 			 $metadata .= "<br>";
 			}
 
+			//Selvitetään ollaanko jo tehty listan viimeinen tehtävä.
 			pg_query("set search_path to htsysteemi");
 			$listan_viimeinen_t_tulos = pg_query("select max(nro) from sisaltyy_listaan where tl_nimi = '$tl_nimi'");
 			$listan_viimeinen_t_rivi = pg_fetch_row($listan_viimeinen_t_tulos);
@@ -68,6 +63,7 @@ tarkasta_rooli();
 			 echo("<p>T&auml;ss&auml; voidaan sitten n&auml;ytt&auml;&auml; session yhteenveto.<br><a class='napp' href='../listojen_selausta/tehtava_listat.php'>Takaisin listaukseen </a></p>");
 			}
 
+			//Jos tehtäviä on vielä jäljellä, haetaan tehtävän tiedot ja tulostetaan lomake.
 			else {
 			 $teht_id_tulos = pg_query("select teht_id from sisaltyy_listaan where tl_nimi = '$tl_nimi' and nro = '$teht_nro'");
 			 $teht_id_rivi = pg_fetch_row($teht_id_tulos);
