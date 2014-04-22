@@ -1,0 +1,71 @@
+DOKUMENTAATIOON
+luonnos
+
+
+1. Ohjelman ominaisuudet
+
+Kaikki käyttäjät kirjautuvat aluksi järjestelmään. Käyttäjäoikeuksia on kolmea tyyppiä: opiskelija, opettaja ja ylläpitäjä. (Uusien käyttäjien luomiseen ei ole graafista käyttöliittymää, vaan se on ylläpitäjän tehtävä suoraan tietokantaan.)
+
+Opiskelijat voivat suorittaa testisarjoja. < toiminta tarkemmin >
+
+Opettajat voivat myös halutessaan suorittaa testisarjoja. Opettajat voivat luoda uusia tehtäviä ja muokata omia tehtäviään. Opettajat voivat luoda uusia tehtävälistoja ja muokata omia listojaan. < HUOM ONKO NÄIN? > Opettajat voivat selata omien tehtävälistojensa tietoja ja nähdä joitakin tietoja niitä suorittaneista opiskelijoista. < vielä tekemättä .j >
+
+Ylläpitäjän toimia ei ole rajoitettu.
+
+Kaikki käyttäjät pääsevät näkemään järjestelmän yleiset raportit (tehtävänannossa määrätyt, sekä pakolliset että valinnaiset).
+
+< opiskelijoiden omat raportit vielä tekemättä .j >
+
+
+2. Työryhmän työnjako
+
+Tuuli Kähkönen:
+
+
+Jenni Saaristo:
+- Käyttöliittymän pohjasuunnittelu ja CSS
+- Aloitusnäkymä ja tehtävälistan tarkemmat tiedot
+- Raportit ja muu tietojen selaus
+
+Anniina Seppä:
+
+
+3. Kuvaus toteutuksesta
+
+- php ja psql
+
+< mä piirrän tästä siistimmän kuvan, joka vastaa lopullista systeemiä .j >
+
+Kirjauduttuaan käyttäjä pääse alkunäkymään, jossa tehtäväsarjat näkyvissä. Sarjan valitsemalla pääse katsomaan sen tarkempia tietoja. Täältä pääse suorittamaan sarjan. Ope pääsee muokkaamaan (ehkä?) omaa sarjaansa.
+
+Alunäkymästä opet ja ylläpitäjät pääsevät luomaan uusia sekä muokkaamaan vanhoja tehtäviä, ja luomaan tehtävälistoja.
+
+Alkunäkymästä pääsee myös selaamaan sekä yleisiä raportteja että ns. omia tietoja.
+
+... muuta mitä?
+
+
+4. Ohjelman käyttö
+
+- valmistelu (?)
+- käyttö
+
+
+5. Muutokset ykkösvaiheesta perusteluineen
+
+- sessiotiedot -näkymä muuttui sen mukaan, mikä palveli parhaiten mutkikkaampien raporttien tuottamista
+- muuta?
+
+
+6. Oma arvio
+
+Mikä oli vaikeaa
+- php:n haltuunotto! .j
+
+
+
+Mitä puutteita jäi
+- uusien käyttäjien luomista ei käsitelty .j
+
+
+
