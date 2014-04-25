@@ -25,7 +25,7 @@ tarkasta_rooli();
 			<h1>SQL-harjoituksia</h1>
 		</header>
 
-		<!-- - - - Tagin <article> sisään sivun varsinainen HTML-sisältÃƒÆ’Ã‚Â¶. - - - -->
+		<!-- - - - Tagin <article> sisÃ¤Ã¤n sivun varsinainen HTML-sisÃ¤ltÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¶. - - - -->
 		<article>
 			<?php	 
 			include '../listojen_selausta/ulospalikka.php';
@@ -34,7 +34,7 @@ tarkasta_rooli();
 			pg_query("set search_path to htsysteemi");
 
 			$ses_id = $_SESSION["ses_id"];
-			$tl_nimi = $_SESSION["tl_nimi"];
+			$tl_nimi = $_SESSION["tlnimi"];
 			$teht_nro = $_SESSION["teht_nro"];
 			
 			//Kannan rakenne muotoilluksi merkkijonoksi.
@@ -53,7 +53,7 @@ tarkasta_rooli();
 			 $metadata .= "<br>";
 			}
 
-			//Selvitetään ollaanko jo tehty listan viimeinen tehtävä.
+			//SelvitetÃ¤Ã¤n ollaanko jo tehty listan viimeinen tehtÃ¤vÃ¤.
 			pg_query("set search_path to htsysteemi");
 			$listan_viimeinen_t_tulos = pg_query("select max(nro) from sisaltyy_listaan where tl_nimi = '$tl_nimi'");
 			$listan_viimeinen_t_rivi = pg_fetch_row($listan_viimeinen_t_tulos);
@@ -63,7 +63,7 @@ tarkasta_rooli();
 			 echo("<p>T&auml;ss&auml; voidaan sitten n&auml;ytt&auml;&auml; session yhteenveto.<br><a class='napp' href='../listojen_selausta/tehtava_listat.php'>Takaisin listaukseen </a></p>");
 			}
 
-			//Jos tehtäviä on vielä jäljellä, haetaan tehtävän tiedot ja tulostetaan lomake.
+			//Jos tehtÃ¤viÃ¤ on vielÃ¤ jÃ¤ljellÃ¤, haetaan tehtÃ¤vÃ¤n tiedot ja tulostetaan lomake.
 			else {
 			 $teht_id_tulos = pg_query("select teht_id from sisaltyy_listaan where tl_nimi = '$tl_nimi' and nro = '$teht_nro'");
 			 $teht_id_rivi = pg_fetch_row($teht_id_tulos);
