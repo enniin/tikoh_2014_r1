@@ -6,7 +6,7 @@ tarkasta_rooli();
 $yhteys = luo_yhteys();
 pg_query("set search_path to htsysteemi");
 
-//TehdÃƒÂ¤ÃƒÂ¤n uusi ses_id manuaalisesti
+//TehdÃƒÆ’Ã‚Â¤ÃƒÆ’Ã‚Â¤n uusi ses_id manuaalisesti
 $ses_id_tulos = pg_query("select max(ses_id) from sessio");
 $ses_id_rivi = pg_fetch_row($ses_id_tulos);
 $ses_id = $ses_id_rivi[0];
