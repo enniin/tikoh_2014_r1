@@ -8,7 +8,7 @@ $yhteys = luo_yhteys();
 pg_query("set search_path to htsysteemi");
 
 $ses_id = $_SESSION["ses_id"];
-$tl_nimi = $_SESSION["tl_nimi"];
+$tl_nimi = $_SESSION["tlnimi"];
 $teht_nro = $_SESSION["teht_nro"];
 
 $teht_id_tulos = pg_query("select teht_id from sisaltyy_listaan where tl_nimi = '$tl_nimi' and nro = '$teht_nro'");
@@ -17,6 +17,11 @@ $teht_id = $teht_id_rivi[0];
 
 $alk_aika = $_POST["alk_aika"];
 $vastaus = $_POST["vastaus"];
+
+//Manuaalinen syntaksivirheiden tarkistus.
+if(substr_count($vastaus, "(") > 0) {
+ while()
+}
 
 //Haetaan esimerkkivastaus ja tehdään sillä kysely.
 $esim_vast_tulos = pg_query("select esim_vast from esimerkkivastaus where teht_id = $teht_id");
@@ -27,12 +32,8 @@ $oikea_tulos = pg_query($esim_vast);
 
 //Lähetetään kantaan käyttäjän kysely.
 $kayttajan_vast_tulos = pg_query($vastaus);
-//Tässä muuttujassa totuusarvo merkkijonona, jotta voidaan käyttää suoraan SQL-lauseissa.
+//Tässä muuttujassa totuusarvo merkkijonona, jotta voidaan käyttää sitä suoraan SQL-lauseissa.
 $oikein = "false";
-
-//Alustetaan sessiomuuttujat kyselyjen vastausten tallentamista varten.
-$_SESSION["kayttajan_vastaus"] = "<table><tr>";
-$_SESSION["oikea_vastaus"] = "<table><tr>";
 
 //Jos on jo aiemmin saatu virheilmoitus, poistetaan vanha.
 if(array_key_exists("virheilm", $_SESSION)) {
@@ -41,7 +42,12 @@ if(array_key_exists("virheilm", $_SESSION)) {
 
 //Käydään kyselyiden tulokset läpi, jos ei tullut virheilmoitusta.
 if($kayttajan_vast_tulos) {
+ //Alustetaan sessiomuuttujat kyselyjen vastausten tallentamista varten.
+ $_SESSION["kayttajan_vastaus"] = "<table>";
+ $_SESSION["oikea_vastaus"] = "<table>";
  while ($oikea_rivi = pg_fetch_row($oikea_tulos)) {
+  $_SESSION["kayttajan_vastaus"] .= "<tr>";
+  $_SESSION["oikea_vastaus"] .= "<tr>";
   //Jos rivit täsmäävät, tulos on oikein tähän mennessä.
   if($oikea_rivi == $kayttajan_rivi = pg_fetch_row($kayttajan_vast_tulos)) {
    $oikein = "true";
@@ -60,13 +66,16 @@ if($kayttajan_vast_tulos) {
  
  //Tallennetaan loputkin käyttäjän vastauksen tuloksesta.
  while($kayttajan_rivi = pg_fetch_row($kayttajan_vast_tulos)) {
+  $_SESSION["kayttajan_vastaus"] .= "<tr>";
   foreach($kayttajan_rivi as $k_solu) {
    $_SESSION["kayttajan_vastaus"] .= "<td>$k_solu</td>";
   }
+  $_SESSION["kayttajan_vastaus"] .= "</tr>";
  }
  $_SESSION["kayttajan_vastaus"] .= "</table>";
  
 }
+
 //Jos kysely ei onnistunut, tallennetaan sessiomuuttujaan tietokannan virheilmoitus.
 else {
  $_SESSION["virheilm"] = pg_last_error();
