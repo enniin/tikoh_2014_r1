@@ -3,7 +3,7 @@
 	// R6 - vertailu:
 	
 	
-	$kysely = "SELECT paa_aine, count(s.ses_id) as sessioita, sum(oikeat)*100/count(*) as oik_pros, round(avg(yrit_oik)::numeric,2) as ka_yrit, avg(kesto) as ka_aika
+	$kysely = "SELECT paa_aine, count(distinct s.ses_id) as sessioita, sum(oikeat)*100/count(*) as oik_pros, round(avg(yrit_oik)::numeric,2) as ka_yrit, avg(kesto) as ka_aika
 FROM (opiskelija as op INNER JOIN sessio as s ON op.kayt_id = s.kayt_id)
 	INNER JOIN (select ses_id, kesto,
 	case when oikein = 't' then 1 else 0 end oikeat,

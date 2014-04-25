@@ -43,12 +43,14 @@ $_SESSION["tlnimi"] = '';
 				// Linkkirivi:
 				echo '<p><br />';
 				
-				// Opettajan linkit
+				// Linkit tsekkauksineen
 				if ($_SESSION["rooli"] == 'opettaja' || $_SESSION["rooli"] == 'yllapitaja')
 					include 'opett_linkit.php';
 				
-				// Muut linkit
-				echo '<a class="napp" href="../raportointi/raportti.php"> Yleiset raportit </a>';
+				if ($_SESSION["rooli"] == 'yllapitaja')
+					echo '<a class="napp" href="../raportointi/raportti.php"> Yleiset raportit </a>';
+				else
+					echo '<a class="napp" href="../raportointi/oma_raportti.php"> Omat raportit </a>';
 				echo '</p>';
 			
 			?>

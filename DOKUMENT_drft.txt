@@ -10,9 +10,7 @@ Opiskelijat voivat suorittaa testisarjoja. < toiminta tarkemmin >
 
 Opettajat voivat myös halutessaan suorittaa testisarjoja. Opettajat voivat luoda uusia tehtäviä ja muokata omia tehtäviään. Opettajat voivat luoda uusia tehtävälistoja ja muokata omia listojaan. < HUOM ONKO NÄIN? > Opettajat voivat selata omien tehtävälistojensa tietoja ja nähdä joitakin tietoja niitä suorittaneista opiskelijoista. < vielä tekemättä .j >
 
-Ylläpitäjän toimia ei ole rajoitettu.
-
-Kaikki käyttäjät pääsevät näkemään järjestelmän yleiset raportit (tehtävänannossa määrätyt, sekä pakolliset että valinnaiset).
+Ylläpitäjän toimia ei ole rajoitettu. Ylläpitäjä pääsee myös näkemään järjestelmän yleiset raportit (tehtävänannossa määrätyt, sekä pakolliset että valinnaiset).
 
 < opiskelijoiden omat raportit vielä tekemättä .j >
 

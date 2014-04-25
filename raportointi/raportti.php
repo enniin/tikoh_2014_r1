@@ -39,7 +39,7 @@ tarkasta_rooli();
 				include 'rap_R1.php';
 				
 				// Tehtävälistan tietoja (pakollinen):
-				echo '<h1>R2 - Tehtävälistan tietoja</h1>';
+				echo '<h1>R2 & R3 - Tehtävälistan tietoja</h1>';
 				echo '<p>Tee raportti, joka näyttää tiettyyn tehtävälistaan liittyvien sessioiden yhteenvetotiedot: session nopein, hitain ja keskimääräinen suoritusaika.</p>';
 				echo '<p>Raportin R3 saat esiin tehtävälistan nimeä klikkaamalla.</p>';
 				include 'rap_R2.php';
@@ -58,10 +58,10 @@ tarkasta_rooli();
 				echo '<h1>R6 - Opiskelijoiden vertailu</h1>';
 				echo '<p>Vertaile opiskelijoiden onnistumista tehtävissä pääaineittain. Perustele, kuinka mittaat onnistumista.</p>';
 				echo '<p>Mihin vertailu perustuu: <ul>
-	<li>sessioiden määrä kertoo aktiivisuudesta</li>
-	<li>onnistumisprosentti ... no, onnistumisesta</li>
-	<li>yrityskertojen keskiarvo pätevyydestä vähän tarkemmin</li>
-	<li>keskimääräinen aika tehtävää kohden sujuvuudesta ja sisäistämisestä</li>
+	<li>Sessioiden määrä kertoo aktiivisuudesta</li>
+	<li>Onnistumisprosentti yleisestä osaamisesta</li>
+	<li>Yrityskertojen keskiarvo pätevyydestä vähän tarkemmin</li>
+	<li>Keskimääräinen aika tehtävää kohden sujuvuudesta ja sisäistämisestä</li>
 	</ul></p>';
 				include 'rap_R6.php';
 				
