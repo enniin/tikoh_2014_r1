@@ -18,11 +18,6 @@ $teht_id = $teht_id_rivi[0];
 $alk_aika = $_POST["alk_aika"];
 $vastaus = $_POST["vastaus"];
 
-//Manuaalinen syntaksivirheiden tarkistus.
-if(substr_count($vastaus, "(") > 0) {
- while()
-}
-
 //Haetaan esimerkkivastaus ja tehdään sillä kysely.
 $esim_vast_tulos = pg_query("select esim_vast from esimerkkivastaus where teht_id = $teht_id");
 $esim_vast_rivi = pg_fetch_row($esim_vast_tulos);
