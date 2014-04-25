@@ -33,22 +33,33 @@ Anniina Seppä:
 3. Kuvaus toteutuksesta
 
 - php ja psql
+- osioittain kaikki jotain?
 
-< mä piirrän tästä siistimmän kuvan, joka vastaa lopullista systeemiä .j >
+kirjautuminen
 
-Kirjauduttuaan käyttäjä pääse alkunäkymään, jossa tehtäväsarjat näkyvissä. Sarjan valitsemalla pääse katsomaan sen tarkempia tietoja. Täältä pääse suorittamaan sarjan. Ope pääsee muokkaamaan (ehkä?) omaa sarjaansa.
+listojen lista ja listan tiedot
 
-Alunäkymästä opet ja ylläpitäjät pääsevät luomaan uusia sekä muokkaamaan vanhoja tehtäviä, ja luomaan tehtävälistoja.
+etc
 
-Alkunäkymästä pääsee myös selaamaan sekä yleisiä raportteja että ns. omia tietoja.
 
 ... muuta mitä?
 
 
 4. Ohjelman käyttö
 
-- valmistelu (?)
-- käyttö
+Ohjelma sisältää itsessään toiminnallisuudet sekä tehtävien että tehtävälistojen luomiseksi. Periaatteessa valmisteluksi riittää siis käyttäjien luominen tietokantaan.
+
+Kirjauduttuaan käyttäjä pääse alkunäkymään, joka esittää tehtävälistat ja käyttäjäoikeuksista riippuvaisen linkkivalikoiman. Tehtävälistan valitsemalla pääsee tarkastelemaan sen tarkempia tietoja, ja myös suorittamaan sen.
+
+Alkunäkymästä opettajat ja ylläpitäjät pääsevät luomaan uusia ja muokkaamaan vanhoja tehtäviä, sekä luomaan tehtävälistoja. Raporttilinkit näkyvät kaikille, ja vievät raporttinäkymiin, joihin ei liity sen kummempaa toiminnallisuutta.
+
+< opettajan tehtävälisäysjutskista yms >
+
+Tehtävälistan tiedoista pääsee suorittamaan listan. Jos on ylläpitäjä tai listan laatinut opettaja, pääsee myös muokkaamaan sitä.
+
+Suoritussessiossa käydään tehtävät läpi numerojärjestyksessä. Jokaista tehtävää saa yrittää kolme kertaa, minkä jälkeen annetaan mahdollisuus nähdä oikea vastaus ja siirrytään listassa eteenpäin. Lopuksi näytetään tietoja suorituksen onnistumisesta.
+
+
 
 
 5. Muutokset ykkösvaiheesta perusteluineen
