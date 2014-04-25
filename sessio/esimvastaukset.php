@@ -25,7 +25,7 @@ tarkasta_rooli();
 			<h1>SQL-harjoituksia</h1>
 		</header>
 
-		<!-- - - - Tagin <article> sisään sivun varsinainen HTML-sisältö. - - - -->
+		<!-- - - - Tagin <article> sisÃ¤Ã¤n sivun varsinainen HTML-sisÃ¤ltÃ¶. - - - -->
 		<article>
 			<?php	 
 			include '../listojen_selausta/ulospalikka.php';
