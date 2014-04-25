@@ -31,21 +31,22 @@ tarkasta_rooli();
 			include '../listojen_selausta/ulospalikka.php';
 
 			if($_SESSION["oikein"] == "true") {
-			 echo("<p>Oikea vastaus!</p>");
+			 $kayttajan_vastaus = $_SESSION["kayttajan_vastaus"];
+			 echo("<p>Oikea vastaus!</p><p>Kyselyn tulos:$kayttajan_vastaus</p>");
 			}
 
 			else {
 			 //Virheilmoitukset kannasta.
 			 if(array_key_exists("virheilm", $_SESSION)) {
 			  $virheilm = $_SESSION["virheilm"];
-			  echo("<p>Kyselyss&auml; virhe:<br>$virheilm</p>");
+			  echo("<p>Tietokanta palautti virheilmoituksen:<br>$virheilm</p>");
 			 }
 
 			 //Käyttäjän vastaus ja oikea vastaus.
 			 else {
 			  $kayttajan_vastaus = $_SESSION["kayttajan_vastaus"];
 			  $oikea_vastaus = $_SESSION["oikea_vastaus"];
-			  echo("<p>V&auml;&auml;rin! Oman kyselysi tulos:<br>$kayttajan_vastaus<br>Oikean vastauksen antama tulos:<br>$oikea_vastaus</p>");
+			  echo("<p>Kyselyss&auml; looginen virhe!<br>Oman kyselysi tulos:<br>$kayttajan_vastaus<br>Oikean vastauksen antama tulos:<br>$oikea_vastaus</p>");
 			 }
 			 //Annetaan mahdollisuus nähdä esimerkkivastaukset.
 			 if(array_key_exists("nayta_ratk", $_SESSION) && $_SESSION["nayta_ratk"] == true) {
