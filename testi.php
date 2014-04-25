@@ -1,6 +1,6 @@
 <?php
 
-$vastaus = "select (dlkfjgj testi) (jgadlkfgj) ";
+$vastaus = "select (dlkfjgj testi) (jgadlkfgj ";
 
 //Tässä on joku vika.
 function tarkista_sulkeet($mjono) {
