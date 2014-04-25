@@ -6,14 +6,14 @@ tarkasta_rooli();
 $yhteys = luo_yhteys();
 pg_query("set search_path to htsysteemi");
 
-//TehdÃƒÆ’Ã‚Â¤ÃƒÆ’Ã‚Â¤n uusi ses_id manuaalisesti
+//Tehdään uusi ses_id manuaalisesti
 $ses_id_tulos = pg_query("select max(ses_id) from sessio");
 $ses_id_rivi = pg_fetch_row($ses_id_tulos);
 $ses_id = $ses_id_rivi[0];
 $ses_id++;
 
 $kayt_id = $_SESSION["kirjautunut"];
-$tl_nimi = $_SESSION["tl_nimi"];
+$tl_nimi = $_SESSION["tlnimi"];
 
 pg_query("insert into sessio(ses_id, kayt_id, tl_nimi, pvm) values('$ses_id', '$kayt_id', '$tl_nimi', current_date)");
 
