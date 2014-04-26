@@ -33,7 +33,7 @@ if(array_key_exists("virheilm", $_SESSION)) {
 
 //Tarkistetaan sulkeiden määrä ja puolipiste käyttäjän vastauksesta manuaalisesti.
 if(!tarkista_sulkeet($vastaus))
- $_SESSION["syntaksivirhe"] = "Kyselyss&auml; pariton m&auml;&auml;r&auml; sulkeita!";
+ $_SESSION["syntaksivirhe"] = "Tarkista sulkeet!";
 if(!tarkista_puolipiste($vastaus))
  $_SESSION["syntaksivirhe"] = "Puolipiste kyselyn per&auml;&auml;n!";
 
