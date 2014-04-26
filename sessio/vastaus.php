@@ -31,22 +31,31 @@ tarkasta_rooli();
 			include '../listojen_selausta/ulospalikka.php';
 
 			if($_SESSION["oikein"] == "true") {
-			 $kayttajan_vastaus = $_SESSION["kayttajan_vastaus"];
-			 echo("<p>Oikea vastaus!</p><p>Kyselyn tulos:$kayttajan_vastaus</p>");
+			 echo("<p>Oikea vastaus!</p>");
+			 if(array_key_exists("teht_tyyppi", $_SESSION) && $_SESSION["teht_tyyppi"] == "select") {
+			  $kayttajan_vastaus = $_SESSION["kayttajan_vastaus"];
+			  echo("<p>Kyselyn tulos:$kayttajan_vastaus</p>");
+			 }
 			}
 
 			else {
-			 //Virheilmoitukset kannasta.
-			 if(array_key_exists("virheilm", $_SESSION)) {
-			  $virheilm = $_SESSION["virheilm"];
-			  echo("<p>Tietokanta palautti virheilmoituksen:<br>$virheilm</p>");
+			 //Syntaksivirheet.
+			 if(array_key_exists("syntaksivirhe", $_SESSION)) {
+			  $syntaksivirhe = $_SESSION["syntaksivirhe"];
+			  echo("<p>$syntaksivirhe</p>");
 			 }
-
-			 //Käyttäjän vastaus ja oikea vastaus.
 			 else {
-			  $kayttajan_vastaus = $_SESSION["kayttajan_vastaus"];
-			  $oikea_vastaus = $_SESSION["oikea_vastaus"];
-			  echo("<p>Kyselyss&auml; looginen virhe!<br>Oman kyselysi tulos:<br>$kayttajan_vastaus<br>Oikean vastauksen antama tulos:<br>$oikea_vastaus</p>");
+			  //Virheilmoitukset kannasta.
+			  if(array_key_exists("virheilm", $_SESSION)) {
+			   $virheilm = $_SESSION["virheilm"];
+			   echo("<p>Tietokanta palautti virheilmoituksen:<br>$virheilm</p>");
+			  }
+			  //Käyttäjän vastaus ja oikea vastaus.
+			  else {
+			   $kayttajan_vastaus = $_SESSION["kayttajan_vastaus"];
+			   $oikea_vastaus = $_SESSION["oikea_vastaus"];
+			   echo("<p>Kyselyss&auml; looginen virhe!<br>Oman kyselysi tulos:<br>$kayttajan_vastaus<br>Oikean vastauksen antama tulos:<br>$oikea_vastaus</p>");
+			  }
 			 }
 			 //Annetaan mahdollisuus nähdä esimerkkivastaukset.
 			 if(array_key_exists("nayta_ratk", $_SESSION) && $_SESSION["nayta_ratk"] == true) {
@@ -58,7 +67,7 @@ tarkasta_rooli();
 
 
 			echo("<p><a href='tehtava.php'>Jatka</a></p>");
-			//print_r($_SESSION);
+
 
 			?>
 
