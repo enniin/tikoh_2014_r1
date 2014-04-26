@@ -72,6 +72,9 @@ tarkasta_rooli();
 			?>
 
 		</article>
+		<footer role="contentinfo">
+			<p>&copy; K&auml;hk&ouml;nen, Saaristo, Sepp&auml;, TiKO 2014</p>
+		</footer>
 	</div>
 </body>
 </html>
