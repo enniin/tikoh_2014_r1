@@ -25,7 +25,7 @@ tarkasta_rooli();
 			<h1>SQL-harjoituksia</h1>
 		</header>
 
-		<!-- - - - Tagin <article> sisÃ¤Ã¤n sivun varsinainen HTML-sisÃ¤ltÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¶. - - - -->
+		<!-- - - - Tagin <article> sisään sivun varsinainen HTML-sisältö. - - - -->
 		<article>
 			<?php	 
 			include '../listojen_selausta/ulospalikka.php';
@@ -53,17 +53,26 @@ tarkasta_rooli();
 			 $metadata .= "<br>";
 			}
 
-			//SelvitetÃ¤Ã¤n ollaanko jo tehty listan viimeinen tehtÃ¤vÃ¤.
+			//Selvitetään ollaanko jo tehty listan viimeinen tehtävä.
 			pg_query("set search_path to htsysteemi");
 			$listan_viimeinen_t_tulos = pg_query("select max(nro) from sisaltyy_listaan where tl_nimi = '$tl_nimi'");
 			$listan_viimeinen_t_rivi = pg_fetch_row($listan_viimeinen_t_tulos);
 			$listan_viimeinen_t = $listan_viimeinen_t_rivi[0];
-
 			if($teht_nro > $listan_viimeinen_t) {
-			 echo("<p>T&auml;ss&auml; voidaan sitten n&auml;ytt&auml;&auml; session yhteenveto.<br><a class='napp' href='../listojen_selausta/tehtava_listat.php'>Takaisin listaukseen </a></p>");
+			 //Näytetään session yhteenveto.
+			 $yhteenveto_tulos = pg_query("select alku, loppu, kesto, ratkaistu from suoritukset where s_id = $ses_id");
+             $yhteenveto_rivi = pg_fetch_row($yhteenveto_tulos);
+			 date_default_timezone_set('Europe/Helsinki');
+			 
+			 echo "<p><table><tr><th>aloitusaika</th><th>lopetusaika</th><th>kesto</th><th>teht&auml;vi&auml; oikein</th></tr>";
+			 $alku = date_format(date_create($yhteenveto_rivi[0]), 'H:i:s');
+			 $loppu = date_format(date_create($yhteenveto_rivi[1]), 'H:i:s');
+			 $kesto = date_format(date_create($yhteenveto_rivi[2]), 'H:i:s');
+			 echo "<tr><td>$alku</td><td>$loppu</td><td>$kesto</td><td>$yhteenveto_rivi[3]</td></tr></table></p>";
+			 echo("<a class='napp' href='../listojen_selausta/tehtava_listat.php'>Takaisin listaukseen </a></p>");
 			}
 
-			//Jos tehtÃ¤viÃ¤ on vielÃ¤ jÃ¤ljellÃ¤, haetaan tehtÃ¤vÃ¤n tiedot ja tulostetaan lomake.
+			//Jos tehtäviä on vielä jäljellä, haetaan tehtävän tiedot ja tulostetaan lomake.
 			else {
 			 $teht_id_tulos = pg_query("select teht_id from sisaltyy_listaan where tl_nimi = '$tl_nimi' and nro = '$teht_nro'");
 			 $teht_id_rivi = pg_fetch_row($teht_id_tulos);
@@ -76,16 +85,20 @@ tarkasta_rooli();
 
 			 $teht_kuvaus_tulos = pg_query("select kuvaus from tehtava where teht_id = '$teht_id'");
 			 $teht_kuvaus_rivi = pg_fetch_row($teht_kuvaus_tulos);
-			 echo("<h1>Teht&auml;v&auml; $teht_nro</h1><p>$metadata</p><p>$teht_kuvaus_rivi[0]<p><form action='tehtavan_tarkistus.php' method='post'>
-<label for='vastaus'>Vastaus:</label><textarea rows='5' cols='30' name='vastaus' id='vastaus'></textarea><br>
-<input type='submit' value='OK'>
+			 echo("<h1>Teht&auml;v&auml; $teht_nro</h1><pre><code>$metadata</code></pre><p>$teht_kuvaus_rivi[0]<p><div id='vastausAlue'>
+<div><form action='tehtavan_tarkistus.php' method='post'>
+<label for='vastaus'>Vastaus:</label><br><textarea rows='5' cols='30' name='vastaus' id='vastaus'></textarea><br>
+<input type='submit' value='OK'></div>
 <input type='hidden' name='alk_aika' value='$alk_aika'>
-</form>");
+</div></form>");
 			}
 			pg_close();
 			?>
 
 		</article>
+		<footer role="contentinfo">
+			<p>&copy; K&auml;hk&ouml;nen, Saaristo, Sepp&auml;, TiKO 2014</p>
+		</footer>
 	</div>
 </body>
 </html>
