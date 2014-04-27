@@ -46,13 +46,16 @@
 		$vastaus2_paiv = paivitaVastaus($vastaus2, $selitys2, $vanha2, $teht_id);
 		$vastaus3_paiv = paivitaVastaus($vastaus3, $selitys3, $vanha3, $teht_id);		
 
-		if ($tehtava_paiv && $vastaus1_paiv && $vastaus2_paiv && $vastaus3_paiv)
+		if ($tehtava_paiv && $vastaus1_paiv && $vastaus2_paiv && $vastaus3_paiv) {
 			pg_query("COMMIT");
-		else
+			header("Location: tehtavalista.php");
+		}
+		else {
 			pg_query("ROLLBACK");
+			echo '<p>Päivitys ei onnistunut.</p>';
+			echo '<a href = "../listojen_selausta/tehtava_listat.php" class = "napp">Palaa etusivulle</a></p>';
+		}
 
-		header("Location: tehtavalista.php");
-		
 		pg_close($yhteys);
 	}
 ?>
