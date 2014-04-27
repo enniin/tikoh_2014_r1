@@ -5,7 +5,6 @@ session_start();
 $kayt_tunnus = $_POST['kayt_tunnus'];
 $salasana = $_POST['salasana'];
 
-// Ulkoinen yhteystiedosto (jens):
 include '../db_connct.php';
 				
 $yhteys = luo_yhteys();
@@ -49,7 +48,6 @@ else {
    }
   }
  }
- // Väliaikainen uudelleenohjaus (jens):
  header('Location: ../listojen_selausta/tehtava_listat.php');
 }
 
