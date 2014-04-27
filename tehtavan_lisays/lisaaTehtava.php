@@ -32,13 +32,14 @@
 		$selitys2 = $_POST['selitys2'];
 		$selitys3 = $_POST['selitys3'];
 
-		// Teht:n ID vastauksien talletusta varten.
-		$teht_id = pg_fetch_result( pg_query("SELECT COUNT(teht_id) FROM htsysteemi.tehtava"), 0, 0) + 1;
-
 		// Lisätään...
 		pg_query("BEGIN");
+		
+		// Teht id.
+		$id_haku_l = "SELECT NEXTVAL (pg_get_serial_sequence('htsysteemi.tehtava','teht_id'))";
+		$teht_id = pg_fetch_result(pg_query($id_haku_l), 0, 0);
 
-		$tehtava_ll = "INSERT INTO htsysteemi.tehtava VALUES (DEFAULT, '$tyyppi', '$kuvaus', '$pvm', '$kayt_id')";
+		$tehtava_ll = "INSERT INTO htsysteemi.tehtava VALUES ('$teht_id', '$tyyppi', '$kuvaus', '$pvm', '$kayt_id')";
 		
 		$tehtava_paiv = (int)(pg_query($tehtava_ll));
 		$vastaus1_paiv = luoVastaus($teht_id, $vastaus1, $selitys1);
@@ -56,5 +57,9 @@
 
 		if ($onnistui)
 			header("Location: tehtavalista.php");
+		else {
+			echo '<p>Lisäys ei onnistunut.</p>';
+			echo '<a href = "../listojen_selausta/tehtava_listat.php" class = "napp">Palaa etusivulle</a></p>';
+		}
 	}
 ?>
