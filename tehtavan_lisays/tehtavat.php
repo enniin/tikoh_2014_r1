@@ -1,9 +1,10 @@
 <?php
 	function luoLista($lajittelu) {
-			$hakulause = "SELECT teht_id, tyyppi, kuvaus, luontipvm FROM htsysteemi.tehtava ORDER BY $lajittelu";
+			$hakulause = "SELECT teht_id, tyyppi, kuvaus, luontipvm, kayt_id FROM htsysteemi.tehtava ORDER BY $lajittelu";
 			$tulos = pg_query($hakulause);
+			$kayt_id = $_SESSION['kirjautunut'];
 	
-			if (!$tulos) {
+			if (!((int)$tulos)) {
 				echo "Tehtäviä ei löytynyt.";
 				exit;
 			}
@@ -24,8 +25,11 @@
 				echo "<td>$rivi[3]</td>";
 
 				$teht_id = $rivi[0];
-
-				echo "<td><a href='paivitaTehtavaLomake.php?tId=$teht_id'>Muokkaa</a></td>";
+				
+				// Vain tehtävän luojan sallitaan tehdä muutoksia.
+				if ($kayt_id == $rivi[4])
+					echo "<td><a href='paivitaTehtavaLomake.php?tId=$teht_id'>Muokkaa</a></td>";
+				
 				echo "</tr>";
 			}
 
