@@ -17,7 +17,7 @@
 	$rivi = pg_fetch_row($tulos);
 	if($kayttaja == $rivi[0] || $onadmin)
 	{
-		echo '<a class="napp"> Muokkaa sarjaa </a>';
+		echo '<a class="napp" href="../t_sarja/sarjanMuokkausLomake.php"> Muokkaa sarjaa </a>';
 	}
 				
 	echo '</p>';
