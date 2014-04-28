@@ -26,8 +26,8 @@
 
 				$teht_id = $rivi[0];
 				
-				// Vain tehtävän luojan sallitaan tehdä muutoksia.
-				if ($kayt_id == $rivi[4])
+				// Vain tehtävän luojan/yllapitajan sallitaan tehdä muutoksia.
+				if ($kayt_id == $rivi[4] || tarkasta_rooli() == 'yllapitaja')
 					echo "<td><a href='paivitaTehtavaLomake.php?tId=$teht_id'>Muokkaa</a></td>";
 				
 				echo "</tr>";
