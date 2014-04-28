@@ -51,9 +51,18 @@ p code {
 
 /* ---------------- */
 
-.de-em {
-	color: #999;
+table {
+	margin-left: 1em;
+	margin-right: 3em;
+	padding: 0.5em;
+	border: thin solid grey;
 }
+
+td, th {
+	padding: 0.5em;
+	text-align: left;
+}
+
 
 
 

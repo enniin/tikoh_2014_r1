@@ -10,7 +10,6 @@ body {
   margin: 0;
   padding: 0;
   background-color: #999;
-  background-image: url('../img/bg2.jpg');
   background-attachment: fixed;
 }
 
@@ -65,36 +64,6 @@ footer {
 	text-align: right;
 }
 
-/* ----------- ASEMOINTI: PIENET LAITTEET ----------- */
-/*
-@media screen and (max-device-width: 768px) {
-
-	body {
-		background-attachment: fixed;
-		font-size: 300%;
-	}
-
-	#main, #enter {
-		margin-left: 0;
-		width: 100%;
-		max-width: 100%;
-	}
-
-	article {
-		position: relative;
-		margin-left: 0;
-		margin-bottom: 1em;
-	}
-	
-	button {
-	   font-size: 90%;
-	}
-	
-	pre code {
-	   font-size: 80%;
-	}
-
-} */
 
 /* ------------ Elementtityylit ----------- */
 
@@ -132,10 +101,6 @@ a.napp {
 	border: thin solid black;
 }
 
-img {
-	margin: 0;
-	padding: 0;
-}
 
 button {
 	margin: 1em;
