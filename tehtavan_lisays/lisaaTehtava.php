@@ -23,14 +23,14 @@
 		$kayt_id = $_SESSION['kirjautunut'];
 
 		// Vastaukset.
-		$vastaus1 = $_POST['esimerkkivastaus'];
-		$vastaus2 = $_POST['esimerkkivastaus2'];
-		$vastaus3 = $_POST['esimerkkivastaus3'];
+		$vastaus1 = pg_escape_string($_POST['esimerkkivastaus']);
+		$vastaus2 = pg_escape_string($_POST['esimerkkivastaus2']);
+		$vastaus3 = pg_escape_string($_POST['esimerkkivastaus3']);
 
 		// Vastauksien selitykset.
-		$selitys1 = $_POST['selitys'];
-		$selitys2 = $_POST['selitys2'];
-		$selitys3 = $_POST['selitys3'];
+		$selitys1 = pg_escape_string($_POST['selitys']);
+		$selitys2 = pg_escape_string($_POST['selitys2']);
+		$selitys3 = pg_escape_string($_POST['selitys3']);
 
 		// Lisätään...
 		pg_query("BEGIN");
