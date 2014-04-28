@@ -7,7 +7,7 @@ tarkasta_rooli();
 
 <head>
   <meta charset = "UTF-8" />
-  <title>TikoHT - Yleiset raportit</title>
+  <title>TikoHT - Omat raportit</title>
 
   <link rel="stylesheet" type="text/css" href="../css/basestyle.css" media="screen">
   <link rel="stylesheet" type="text/css" href="../css/printstyle.css" media="print">
