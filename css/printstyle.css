@@ -18,9 +18,6 @@ h3, h2, h1, nav li {
 }
 
 ul {
-	list-style-type: none;
-	display: none;
-	padding: 0;
 	margin: 2em 0 2em 0;
 }
 
