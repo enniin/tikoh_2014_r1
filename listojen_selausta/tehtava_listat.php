@@ -34,7 +34,7 @@ $_SESSION["tlnimi"] = '';
 					include 'opett_ohje.php';
 			?>
 			
-			<h1>Valitse tehtäväsarja:</h1>
+			<h1>Valitse tehtävälista:</h1>
 			<p>
 			<?php
 				// Taulukko

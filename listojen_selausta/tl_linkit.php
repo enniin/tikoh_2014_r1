@@ -3,7 +3,7 @@
 	// Peruslinkit:
 	echo '<p><br />';
 	echo '<a class="napp" href="tehtava_listat.php"> Takaisin listaukseen </a>';
-	echo '<a class="napp" href="../sessio/uusi_sessio.php"> Suorita tehtäväsarja </a>';
+	echo '<a class="napp" href="../sessio/uusi_sessio.php"> Suorita tehtävälista </a>';
 				
 	// Muokkausmahdollisuus tekijälle ja ylläpitäjälle:
 	$kayttaja = $_SESSION["kirjautunut"];
@@ -17,7 +17,7 @@
 	$rivi = pg_fetch_row($tulos);
 	if($kayttaja == $rivi[0] || $onadmin)
 	{
-		echo '<a class="napp" href="../t_sarja/sarjanMuokkausLomake.php"> Muokkaa sarjaa </a>';
+		echo '<a class="napp" href="../t_sarja/sarjanMuokkausLomake.php"> Muokkaa listaa </a>';
 	}
 				
 	echo '</p>';
