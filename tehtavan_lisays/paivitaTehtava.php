@@ -26,17 +26,17 @@
 		$tehtava_ml = "UPDATE htsysteemi.tehtava SET tyyppi='$tyyppi', kuvaus='$kuvaus' WHERE teht_id=$teht_id";
 
 		// Esimerkkivastaukset
-		$vanha1 = $_SESSION['v_vastaus1'];
-		$vastaus1 = $_POST['esimerkkivastaus'];
-		$selitys1 = $_POST['selitys'];
+		$vanha1 = pg_escape_string($_SESSION['v_vastaus1']);
+		$vastaus1 = pg_escape_string($_POST['esimerkkivastaus']);
+		$selitys1 = pg_escape_string($_POST['selitys']);
 
-		$vanha2 = $_SESSION['v_vastaus2'];
-		$vastaus2 = $_POST['esimerkkivastaus2'];
-		$selitys2 = $_POST['selitys2'];
+		$vanha2 = pg_escape_string($_SESSION['v_vastaus2']);
+		$vastaus2 = pg_escape_string($_POST['esimerkkivastaus2']);
+		$selitys2 = pg_escape_string($_POST['selitys2']);
 
-		$vanha3 = $_SESSION['v_vastaus3'];
-		$vastaus3 = $_POST['esimerkkivastaus3'];
-		$selitys3 = $_POST['selitys3'];
+		$vanha3 = pg_escape_string($_SESSION['v_vastaus3']);
+		$vastaus3 = pg_escape_string($_POST['esimerkkivastaus3']);
+		$selitys3 = pg_escape_string($_POST['selitys3']);
 
 		// =============== Tapahtuma alkaa...
 		pg_query("BEGIN");
